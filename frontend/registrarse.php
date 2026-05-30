@@ -18,8 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Se obtienen los valores enviados por el usuario desde el formulario HTML
     $nombre = trim($_POST['nombre']);       // Se eliminan espacios antes y después del nombre
     $correo = trim($_POST['correo']);       // Se elimina el espacio del correo
-    $contraseña = $_POST['contraseña'];     // Contraseña tal como se ingresó
-
+    $contrasena = $_POST['contrasena'];
     // ----------------------------------------------
     //  Verificar si ya existe un usuario con ese correo
     // ----------------------------------------------
@@ -37,11 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // ----------------------------------------------
 
         // Se cifra la contraseña antes de guardarla (por seguridad)
-        $hash_contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
 
-        // Se prepara la consulta SQL para insertar el nuevo registro
-        $stmt = $conexion->prepare("INSERT INTO usuarios (nombre, correo, contraseña) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nombre, $correo, $hash_contraseña); // Vincula los valores
+        $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
+        $stmt = $conexion->prepare("INSERT INTO usuarios (nombre, correo, contrasena) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $nombre, $correo, $contrasena_hash);
 
         // Si la consulta se ejecuta correctamente, se redirige al login
         if ($stmt->execute()) {
@@ -141,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <!-- Campo: Contraseña -->
       <div class="form-group">
         <label>Contraseña:</label>
-        <input type="password" name="contraseña" required minlength="6">
+        <input type="password" name="contrasena" required minlength="6">
       </div>
       
       <!-- Botón para enviar el formulario -->

@@ -15,10 +15,10 @@ if (usuarioEstaLogeado()) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtiene los datos del formulario y elimina espacios en blanco del correo
     $correo = trim($_POST['correo']);
-    $contraseña = $_POST['contraseña'];
+    $contraseña = $_POST['contrasena'];
     
     // Prepara una consulta segura (evita inyección SQL)
-    $stmt = $conexion->prepare("SELECT id, nombre, contraseña FROM usuarios WHERE correo = ?");
+    $stmt = $conexion->prepare("SELECT id, nombre, contrasena FROM usuarios WHERE correo = ?");
     $stmt->bind_param("s", $correo); // Vincula el parámetro del correo al placeholder
     $stmt->execute(); // Ejecuta la consulta
     $stmt->store_result(); // Almacena los resultados para poder contar filas
@@ -26,11 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si el usuario existe (hay 1 fila con ese correo)
     if ($stmt->num_rows === 1) {
         // Asigna los resultados a variables
-        $stmt->bind_result($id, $nombre, $hash_contraseña);
+        $stmt->bind_result($id, $nombre, $hash_contrasena);
         $stmt->fetch();
         
         // Verifica si la contraseña ingresada coincide con el hash almacenado en la base de datos
-        if (password_verify($contraseña, $hash_contraseña)) {
+        if (password_verify($contrasena, $hash_contrasena)) {
             // Si la contraseña es correcta, guarda datos del usuario en la sesión
             $_SESSION['usuario_id'] = $id;
             $_SESSION['usuario_nombre'] = $nombre;
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <div class="form-group">
           <label>Contraseña:</label>
-          <input type="password" name="contraseña" required>
+          <input type="password" name="contrasena" required>
         </div>
         
         <!-- Botón de envío -->
