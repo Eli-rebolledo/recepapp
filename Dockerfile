@@ -6,6 +6,8 @@ RUN a2enmod rewrite
 
 COPY . /var/www/html/
 
+RUN chmod -R 777 /var/www/html/frontend/img
+
 RUN echo '<VirtualHost *:10000>\n\
     DocumentRoot /var/www/html/frontend\n\
     <Directory /var/www/html/frontend>\n\
