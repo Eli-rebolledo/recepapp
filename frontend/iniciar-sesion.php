@@ -15,7 +15,7 @@ if (usuarioEstaLogeado()) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtiene los datos del formulario y elimina espacios en blanco del correo
     $correo = trim($_POST['correo']);
-    $contraseña = $_POST['contrasena'];
+    $contrasena = $_POST['contrasena'];
     
     // Prepara una consulta segura (evita inyección SQL)
     $stmt = $conexion->prepare("SELECT id, nombre, contrasena FROM usuarios WHERE correo = ?");
