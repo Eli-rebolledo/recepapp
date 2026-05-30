@@ -1,7 +1,6 @@
-﻿FROM php:8.2-apache
+FROM php:8.2-apache
 
 RUN docker-php-ext-install mysqli
-
 RUN a2enmod rewrite
 
 COPY . /var/www/html/
@@ -10,7 +9,12 @@ RUN chmod -R 777 /var/www/html/frontend/img
 
 RUN echo '<VirtualHost *:10000>\n\
     DocumentRoot /var/www/html/frontend\n\
+    Alias /backend /var/www/html/backend\n\
     <Directory /var/www/html/frontend>\n\
+        AllowOverride All\n\
+        Require all granted\n\
+    </Directory>\n\
+    <Directory /var/www/html/backend>\n\
         AllowOverride All\n\
         Require all granted\n\
     </Directory>\n\
