@@ -8,6 +8,7 @@ $base_datos = getenv('DB_NAME')   ?: "recepapp";
 
 // Crear la conexión con el servidor MySQL
 $conexion = new mysqli($host, $usuario, $password, $base_datos);
+$conexion->set_charset("utf8mb4");
 
 // Verificar si ocurrió algún error al conectar
 if ($conexion->connect_error) {
