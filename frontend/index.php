@@ -11,21 +11,20 @@ require_once '../backend/helpers.php';
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Configuración básica del documento -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cocina Fácil</title>
 
-  <title>RecepApp | Recetas Fáciles y Deliciosas</title>
+  <!-- Enlace al archivo de estilos CSS -->
+  <link rel="stylesheet" href="<?php echo asset('css/style.css'); ?>">
 
-  <meta name="description" content="Descubre recetas fáciles, postres, sopas y ensaladas en RecepApp. Guarda tus recetas favoritas gratis.">
+  <!-- Fuente de Google para mejorar la apariencia del texto -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
-  <meta name="robots" content="index, follow">
-
-  <link rel="canonical" href="https://recepapp.onrender.com/index.php">
-
-  <meta property="og:title" content="RecepApp">
-  <meta property="og:description" content="Recetas fáciles y deliciosas">
+  <!-- Íconos de Font Awesome (para utensilios, usuario, corazón, etc.) -->
+  <script src="https://kit.fontawesome.com/a2d9d6cfd5.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
 <!-- === NAVBAR === -->
 <header class="navbar">
