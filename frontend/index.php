@@ -8,6 +8,7 @@ require_once __DIR__ . '/../backend/conexion.php';
 // Incluye funciones auxiliares como 'url()' y 'asset()' para manejar rutas y recursos
 require_once '../backend/helpers.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,7 +26,9 @@ require_once '../backend/helpers.php';
   <!-- Íconos de Font Awesome (para utensilios, usuario, corazón, etc.) -->
   <script src="https://kit.fontawesome.com/a2d9d6cfd5.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
+
 <!-- === NAVBAR === -->
 <header class="navbar">
   <div class="logo">
@@ -43,7 +46,7 @@ require_once '../backend/helpers.php';
     <?php if (usuarioEstaLogeado()): ?>
       <!-- Si está logueado, muestra su nombre -->
       <span class="user">Hola, <?php echo htmlspecialchars(obtenerUsuarioNombre()); ?></span>
-      
+
       <!-- Menú de perfil desplegable -->
       <div class="profile-menu">
         <button class="profile-btn"><i class="fas fa-user"></i> Mi Perfil</button>
@@ -85,6 +88,7 @@ require_once '../backend/helpers.php';
 
     // Bucle para mostrar cada categoría
     while($categoria = $categorias->fetch_assoc()):
+
       // Asignar imágenes específicas según el nombre de la categoría
       $imagenes_categorias = [
         'Postres' => 'pastel de chocolate.jpg',
@@ -98,6 +102,7 @@ require_once '../backend/helpers.php';
       // Si la categoría no tiene imagen definida, usa un placeholder
       $imagen_categoria = $imagenes_categorias[$categoria['nombre']] ?? 'placeholder.jpg';
     ?>
+
     <!-- Cada categoría se muestra como una tarjeta con imagen y nombre -->
     <a href="<?php echo url('ver-mas-recetas.php?categoria=' . $categoria['id']); ?>" class="cat-card-link">
       <div class="cat-card">
@@ -107,6 +112,7 @@ require_once '../backend/helpers.php';
         <h4><?php echo $categoria['nombre']; ?></h4>
       </div>
     </a>
+
     <?php endwhile; ?>
   </div>
 </section>
@@ -126,6 +132,7 @@ require_once '../backend/helpers.php';
     // Si hay recetas disponibles
     if ($recetas->num_rows > 0):
       while($receta = $recetas->fetch_assoc()):
+
         // Mensajes de depuración (solo visibles en el código fuente)
         echo "<!-- DEBUG Receta ID: " . $receta['id'] . " -->";
         echo "<!-- DEBUG Título: " . $receta['titulo'] . " -->";
@@ -139,33 +146,33 @@ require_once '../backend/helpers.php';
         // Ruta pública de la imagen
         $imagen_ruta = 'img/' . $receta['imagen'];
     ?>
+
     <!-- Tarjeta individual de receta -->
-<!-- Tarjeta individual de receta -->
-<div class="card">
-  <img src="<?php echo asset($imagen_ruta); ?>" 
-       alt="<?php echo htmlspecialchars($receta['titulo']); ?>"
-       onerror="console.log('Error cargando imagen: <?php echo $receta['imagen']; ?>'); this.src='<?php echo asset('img/placeholder.jpg'); ?>'">
-  
-  <div class="card-content">
-    <span class="categoria-badge"><?php echo htmlspecialchars($receta['categoria_nombre']); ?></span>
-    <h4><?php echo htmlspecialchars($receta['titulo']); ?></h4>
-    <p class="descripcion"><?php echo substr(htmlspecialchars($receta['descripcion']), 0, 100); ?>...</p>
-    
-  <div class="card-meta">
-    <span><i class="fas fa-calendar"></i> <?php echo date('d/m/Y', strtotime($receta['fecha_creacion'])); ?></span>
-  </div>
-    
-    <div class="card-actions">
-      <a href="<?php echo url('ver-receta.php?id=' . $receta['id']); ?>" class="btn-ver">
-        <i class="fas fa-eye"></i> Ver Receta
-      </a>
+    <div class="card">
+      <img src="<?php echo asset($imagen_ruta); ?>" 
+           alt="<?php echo htmlspecialchars($receta['titulo']); ?>"
+           onerror="console.log('Error cargando imagen: <?php echo $receta['imagen']; ?>'); this.src='<?php echo asset('img/placeholder.jpg'); ?>'">
+
+      <div class="card-content">
+        <span class="categoria-badge"><?php echo htmlspecialchars($receta['categoria_nombre']); ?></span>
+        <h4><?php echo htmlspecialchars($receta['titulo']); ?></h4>
+        <p class="descripcion"><?php echo substr(htmlspecialchars($receta['descripcion']), 0, 100); ?>...</p>
+
+        <div class="card-meta">
+          <span><i class="fas fa-calendar"></i> <?php echo date('d/m/Y', strtotime($receta['fecha_creacion'])); ?></span>
+        </div>
+
+        <div class="card-actions">
+          <a href="<?php echo url('ver-receta.php?id=' . $receta['id']); ?>" class="btn-ver">
+            <i class="fas fa-eye"></i> Ver Receta
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+
     <?php 
       endwhile;
     else:
-      // Si no hay recetas, muestra mensaje
       echo "<p>No hay recetas disponibles aún.</p>";
     endif;
     ?>
@@ -179,26 +186,25 @@ require_once '../backend/helpers.php';
 
 <!-- === SCRIPT PARA MENÚ DE PERFIL === -->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const profileBtn = document.querySelector('.profile-btn');
+document.addEventListener('DOMContentLoaded', function() {
+  const profileBtn = document.querySelector('.profile-btn');
 
-    // Si el botón del perfil existe, agrega evento de clic para mostrar el menú desplegable
-    if (profileBtn) {
-      profileBtn.addEventListener('click', function() {
-        document.querySelector('.profile-dropdown').classList.toggle('show');
-      });
-    }
-
-    // Cierra el menú si el usuario hace clic fuera de él
-    window.addEventListener('click', function(e) {
-      if (!e.target.matches('.profile-btn')) {
-        const dropdown = document.querySelector('.profile-dropdown');
-        if (dropdown && dropdown.classList.contains('show')) {
-          dropdown.classList.remove('show');
-        }
-      }
+  if (profileBtn) {
+    profileBtn.addEventListener('click', function() {
+      document.querySelector('.profile-dropdown').classList.toggle('show');
     });
+  }
+
+  window.addEventListener('click', function(e) {
+    if (!e.target.matches('.profile-btn')) {
+      const dropdown = document.querySelector('.profile-dropdown');
+      if (dropdown && dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
+      }
+    }
   });
+});
 </script>
+
 </body>
 </html>
