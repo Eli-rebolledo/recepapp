@@ -13,6 +13,7 @@ require_once '../backend/helpers.php';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="<?php echo asset('css/style.css'); ?>">
 
   <title>RecepApp | Recetas Fáciles y Deliciosas</title>
 
