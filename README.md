@@ -85,8 +85,3 @@ La aplicación utiliza cinco tablas relacionadas entre sí:
 - Solo el autor de una receta o comentario puede editarlo o eliminarlo.
 - Las imágenes subidas se validan por extensión (jpg, jpeg, png y gif) y se guardan con un nombre único.
 
-
-
-## 📄 Licencia
-
-Proyecto con fines educativos.
