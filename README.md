@@ -1,8 +1,8 @@
-# RecepApp
+# RecepApp - Proyecto académico 
 
 RecepApp es una aplicación web de recetas de cocina donde los usuarios pueden descubrir platos nuevos, publicar sus propias recetas, guardar sus favoritas y compartir opiniones con la comunidad.
 
-Proyecto académico desarrollado para **[NOMBRE DE LA MATERIA]** en **[NOMBRE DE LA UNIVERSIDAD]**.
+
 
 ---
 
